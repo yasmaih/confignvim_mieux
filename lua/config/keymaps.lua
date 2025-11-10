@@ -14,23 +14,33 @@ map("n", "<F5>", "<cmd>!gcc -Wall -Wextra -Werror %<CR>", { desc = "Compile C (4
 map("n", "<F6>", function()
   local filename = vim.fn.expand("%")
   local output = vim.fn.expand("%:r")
-  local compile_cmd = "gcc -Wall -Wextra -Werror " .. filename .. " -o " .. output .. " && ./" .. output .. "; exec bash"
-  
-  require("toggleterm.terminal").Terminal:new({
-    cmd = compile_cmd,
-    hidden = true,
-    direction = "float",
-    close_on_exit = false,
-  }):toggle()
+  local compile_cmd = "gcc -Wall -Wextra -Werror "
+    .. filename
+    .. " -o "
+    .. output
+    .. " && ./"
+    .. output
+    .. "; exec bash"
+  map("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle NeoTree" })
+  require("toggleterm.terminal").Terminal
+    :new({
+      cmd = compile_cmd,
+      hidden = true,
+      direction = "float",
+      close_on_exit = false,
+    })
+    :toggle()
 end, { desc = "Compile + Run + Shell" })
 
 -- Terminal flottant libre
 map("n", "<F7>", function()
-  require("toggleterm.terminal").Terminal:new({
-    hidden = true,
-    direction = "float",
-    close_on_exit = false,
-  }):toggle()
+  require("toggleterm.terminal").Terminal
+    :new({
+      hidden = true,
+      direction = "float",
+      close_on_exit = false,
+    })
+    :toggle()
 end, { desc = "Terminal flottant libre" })
 
 -- ========================================
